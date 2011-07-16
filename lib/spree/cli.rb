@@ -1,9 +1,9 @@
 require "rubygems"
-require "date"
+#require "date"
 require "spree_core/version"
-require "rails/generators"
+#require "rails/generators"
 require "thor"
-#require "lib/generators/extension"
+require 'spree/extension'
 
 module Spree
   class CLI < Thor
@@ -22,8 +22,7 @@ module Spree
     desc "extension NAME", "create a new extension with the given name"
     method_option "name", :type => :string
     def extension(name)
-      invoke "extension:new:generate", [options[:name] || name]
+      invoke "spree:extension:generate", [options[:name] || name]
     end
   end
 end
-

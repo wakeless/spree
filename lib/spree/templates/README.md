@@ -1,5 +1,5 @@
-<%= class_name %>
-<%= "=" * class_name.size %>
+<%= human_name %>
+<%= "=" * human_name.size %>
 
 Introduction goes here.
 

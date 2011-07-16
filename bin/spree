@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require "spree"
-require "spree/cli"
+require 'spree/cli'
+require 'active_support/core_ext'
 
 Spree::CLI.start
