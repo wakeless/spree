@@ -7,9 +7,10 @@ Gem::Specification.new do |s|
   s.summary     = 'Full-stack e-commerce framework for Ruby on Rails.'
   s.description = 'Spree is an open source e-commerce framework for Ruby on Rails.  Join us on the spree-user google group or in #spree on IRC'
 
-  s.files        = Dir['README.md', 'lib/**/*']
+  s.files        = Dir['README.md', 'lib/**/*', 'bin']
   s.require_path = 'lib'
   s.requirements << 'none'
+  s.executables  = %w(spree)
 
   s.required_ruby_version     = '>= 1.8.7'
   s.required_rubygems_version = ">= 1.3.6"
