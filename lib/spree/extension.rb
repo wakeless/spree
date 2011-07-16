@@ -39,8 +39,13 @@ module Spree
       template 'hooks.rb.tt', "#{file_name}/lib/#{file_name}_hooks.rb"
       template 'extension.rb.tt', "#{file_name}/lib/#{file_name}.rb"
 
-      #TODO add the exension to Gemfile when applicable
-      #gem file_name, :path => file_name, :require => file_name
+      #Add the extension to Gemfile when applicable
+      if File.exist? 'Gemfile'
+        append_to_file 'Gemfile' do
+          "\ngem '#{file_name}', :path => '#{file_name}', :require => '#{file_name}'\n"
+        end
+      end
+
     end
 
     no_tasks do
