@@ -1,9 +1,8 @@
 require "rubygems"
-#require "date"
 require "spree_core/version"
-#require "rails/generators"
 require "thor"
 require 'spree/extension'
+require 'spree/application'
 
 module Spree
   class CLI < Thor
@@ -24,5 +23,21 @@ module Spree
     def extension(name)
       invoke "spree:extension:generate", [options[:name] || name]
     end
+
+    desc "app NAME", "creates a new rails app configured to use Spree"
+    method_option "name", :type => :string
+    method_option "sample", :type => :boolean, :default => false
+    method_option "bootstrap", :type => :boolean, :default => false
+    method_option "clean", :type => :boolean, :default => false
+    def app(name)
+      invoke "spree:application:generate", [options[:name] || name, options]
+    end
+
+    desc "sandbox", "create a sandbox rails app complete with sample data"
+    def sandbox(name="sandbox")
+      invoke "spree:application:generate", [options[:name] || name, {:clean => true, :sample => true,
+                                                                     :bootstrap => true}]
+    end
+
   end
 end
