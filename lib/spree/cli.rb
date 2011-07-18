@@ -29,6 +29,7 @@ module Spree
     method_option "sample", :type => :boolean, :default => false
     method_option "bootstrap", :type => :boolean, :default => false
     method_option "clean", :type => :boolean, :default => false
+    method_option "dir", :type => :string, :default => '.'
     def app(name)
       invoke "spree:application:generate", [options[:name] || name, options]
     end
@@ -39,5 +40,10 @@ module Spree
                                                                      :bootstrap => true}]
     end
 
+    desc "test_app", "create a rails app suitable for Spree testing"
+    method_option "dir", :type => :string, :default => '.'
+    def test_app(name="test_app")
+      invoke "spree:application:generate", [options[:name] || name, {:clean => true, :dir => options[:dir]}]
+    end
   end
 end

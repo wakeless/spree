@@ -8,12 +8,16 @@ module Spree
 
     desc "generate NAME", "generate sandbox"
     def generate(name, options)
-      remove_directory_if_exists(name) if options[:clean]
+      dir = options[:dir] || '.'
 
-      run "rails new #{name} -GJT"
+      inside dir do
 
-      inside name do
-        append_to_file 'Gemfile' do
+        remove_directory_if_exists(name) if options[:clean]
+
+        run "rails new #{name} -GJT"
+
+        inside name do
+          append_to_file 'Gemfile' do
 <<-gems
 
 gem 'spree', :path => '../'
@@ -25,15 +29,15 @@ else
 end
 
 gems
+          end
+
+          run 'rails g spree:site -f'
+
+          run_silent 'rake spree:install'
+          run_silent 'rake spree_sample:install' if options[:sample]
+          run_silent 'rake db:bootstrap AUTO_ACCEPT=true' if options[:bootstrap]
         end
-
-        run 'rails g spree:site -f'
-
-        run_silent 'rake spree:install'
-        run_silent 'rake spree_sample:install' if options[:sample]
-        run_silent 'rake db:bootstrap AUTO_ACCEPT=true' if options[:bootstrap]
       end
-
     end
 
     private
