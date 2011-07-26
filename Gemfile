@@ -1,7 +1,5 @@
 source 'http://rubygems.org'
 
-gem "spree", :path => File.dirname(__FILE__)
-
 gem 'sqlite3-ruby'
 
 # temporarily needed until next capybara release

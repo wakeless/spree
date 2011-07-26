@@ -3,6 +3,7 @@ require "spree_core/version"
 require "thor"
 require 'spree/extension'
 require 'spree/application'
+require 'spree/test'
 
 module Spree
   class CLI < Thor
@@ -43,7 +44,8 @@ module Spree
     desc "test_app", "create a rails app suitable for Spree testing"
     method_option "dir", :type => :string, :default => '.'
     def test_app(name="test_app")
-      invoke "spree:application:generate", [options[:name] || name, {:clean => true, :dir => options[:dir]}]
+      #invoke "spree:application:generate", [options[:name] || name, {:clean => true, :dir => options[:dir]}]
+      invoke "spree:test:generate", [options[:dir]]
     end
   end
 end
