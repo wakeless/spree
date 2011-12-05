@@ -23,6 +23,7 @@ module Spree
       empty_directory "#{file_name}/app/helpers"
       empty_directory "#{file_name}/app/models"
       empty_directory "#{file_name}/app/views"
+      empty_directory "#{file_name}/app/overrides"
       empty_directory "#{file_name}/config"
       empty_directory "#{file_name}/db"
 
@@ -33,7 +34,7 @@ module Spree
 
       template "LICENSE", "#{file_name}/LICENSE"
       template "Rakefile", "#{file_name}/Rakefile"
-      template "README", "#{file_name}/README"
+      template "README.md", "#{file_name}/README.md"
       template "gitignore", "#{file_name}/.gitignore"
       template "extension.gemspec", "#{file_name}/#{file_name}.gemspec"
       template "Versionfile", "#{file_name}/Versionfile"

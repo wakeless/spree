@@ -26,7 +26,9 @@ module Spree
       opts[:database] = 'sqlite3' if opts[:database].blank?
       opts[:force] = true
       opts[:skip_bundle] = true
+      opts[:old_style_hash] = true
 
+      puts "Generating dummy Rails application..."
       invoke Rails::Generators::AppGenerator,
         [ File.expand_path(dummy_path, destination_root) ], opts
     end
@@ -56,16 +58,12 @@ module Spree
       end
     end
 
-    def cucumber_environment
-      template "cucumber/cucumber.rb", "#{dummy_path}/config/environments/cucumber.rb", :force => true
-    end
-
     attr :lib_name
     attr :database
 
     protected
     def dummy_path
-      'spec/dummy'
+      ENV['DUMMY_PATH'] || 'spec/dummy'
     end
 
     def module_name
@@ -89,7 +87,7 @@ module Spree
     end
 
     def remove_directory_if_exists(path)
-      run "rm -r #{path}" if File.directory?(path)
+      remove_dir(path) if File.directory?(path)
     end
 
     def gemfile_path
